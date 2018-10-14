@@ -33,8 +33,11 @@ In this step, you export the SP metadata, upload, and set the SP metadata in you
 ## 3) Set the IDP metadata to the SP
 1. Try to read your Azure AD B2C (IDP) metadata. The URL or your Azure AD B2C SAML metadata is loacaed in the following URL: https://your-tenant.b2clogin.com/te/your-tenant.onmicrosoft.com/policy-name/Samlp/metadata, replace the tenant name and policy name with your tenant name and the relying party policy name. For example: https://contoso.b2clogin.com/te/contoso.onmicrosoft.com/B2C_1A_SAML2_signup_signin/Samlp/metadata
 
-1. 	Open the file sample/src/main/webapp/WEB-INF/securityContext.xml file. Search for: 
-`<bean id="metadata" class="org.springframework.security.saml.metadata.CachingMetadataManager">`\
+1. 	Open the file sample/src/main/webapp/WEB-INF/securityContext.xml file. Locate following element: 
+
+```XML
+<bean id="metadata" class="org.springframework.security.saml.metadata.CachingMetadataManager">
+```
 
 ## 4) Import Azure AD B2C public key
 Cryptographic material used to decrypt incoming data and verify trust of signatures in SAML messages and metadata is stored either in metadata of remote entities or in the keyManager. Even though that Azure AD B2C metadata contains the public key of the certificate, it's required to add this public key as trusted certificate. In order to import additional trusted key to the keystore run, for example:
@@ -65,7 +68,7 @@ Cryptographic material used to decrypt incoming data and verify trust of signatu
 1. The password to the samlKeystore.jks is `nalle123`
 1. Type `yes`, and click **enter**
 
-Note: if the certificate exists you can remove by using followoing commans
+Note: if the certificate exists you can remove by using following command
 - **List** all certificate: `keytool -list -v -keystore samlKeystore.jks`
 - **Delete** a certificate: `keytool -delete -alias b2c -keystore samlKeystore.jks`
 - **Import**: `keytool -importcert -alias b2c -file b2c.cer -keystore samlKeystore.jks` 
