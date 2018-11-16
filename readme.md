@@ -31,12 +31,33 @@ In this step, you export the SP metadata, upload, and set the SP metadata in you
 1. Upload your policy files
 
 ## 3) Set the IDP metadata to the SP
-1. Try to read your Azure AD B2C (IDP) metadata. The URL or your Azure AD B2C SAML metadata is loacaed in the following URL: https://your-tenant.b2clogin.com/te/your-tenant.onmicrosoft.com/policy-name/Samlp/metadata, replace the tenant name and policy name with your tenant name and the relying party policy name. For example: https://contoso.b2clogin.com/te/contoso.onmicrosoft.com/B2C_1A_SAML2_signup_signin/Samlp/metadata
+1. Try to read your Azure AD B2C (IDP) metadata. The URL or your Azure AD B2C SAML metadata is loacaed in the following URL: `https://your-tenant.b2clogin.com/your-tenant.onmicrosoft.com/policy-name/Samlp/metadata`, replace the tenant name and policy name with your tenant name and the relying party policy name. For example: `https://contoso.b2clogin.com/contoso.onmicrosoft.com/B2C_1A_SAML2_signup_signin/Samlp/metadata`
 
-1. 	Open the file sample/src/main/webapp/WEB-INF/securityContext.xml file. Locate following element: 
+1. 	Open the file sample/src/main/webapp/WEB-INF/**securityContext.xml** file. Locate following element: 
 
 ```XML
 <bean id="metadata" class="org.springframework.security.saml.metadata.CachingMetadataManager">
+```
+
+Under the `<bean class="org.opensaml.saml2.metadata.provider.HTTPMetadataProvider">` element set the Azure AD B2C metadata URL. For example:
+
+```XML
+<!-- IDP Metadata configuration - paths to metadata of IDPs in circle of trust is here -->
+<bean id="metadata" class="org.springframework.security.saml.metadata.CachingMetadataManager">
+    <constructor-arg>
+        <list>
+            <bean class="org.opensaml.saml2.metadata.provider.HTTPMetadataProvider">
+                <constructor-arg>
+                    <value type="java.lang.String">https://contoso.b2clogin.com/contoso.onmicrosoft.com/B2C_1A_SAML2_signup_signin/Samlp/metadata</value>
+                </constructor-arg>
+                <constructor-arg>
+                    <value type="int">5000</value>
+                </constructor-arg>
+                <property name="parserPool" ref="parserPool"/>
+            </bean>
+        </list>
+    </constructor-arg>
+</bean>
 ```
 
 ## 4) Import Azure AD B2C public key
