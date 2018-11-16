@@ -104,7 +104,7 @@ log4j.logger.org.opensaml=DEBUG
 log4j.logger.PROTOCOL_MESSAGE=DEBUG
 ```
 
-## Common mistakes
+## Common issues
 Make sure the issuer and the public key of your certificate much the one that is specified in the IDP (Azure AD B2C) with the one specified in the SAML response.
 ![Metadata mapping](media/metadata-mapping.png). 
 
