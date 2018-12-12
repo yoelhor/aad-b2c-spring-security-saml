@@ -119,6 +119,7 @@ In your policy, make sure you sent the **Saml2AssertionIssuer** technical profil
 ```
 
 When you change your code and need to run again, you may need to kill you terminal, open it again, and run the `mvn tomcat7:run` command.
+
 ![Kill the terminal](media/terminal.png)
 
 ## Disclaimer
