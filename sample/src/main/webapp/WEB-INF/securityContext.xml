@@ -145,7 +145,7 @@
             <list>
                 <bean class="org.opensaml.saml2.metadata.provider.HTTPMetadataProvider">
                     <constructor-arg>
-                        <value type="java.lang.String">https://sunflowersdemo.b2clogin.com/te/sunflowersdemo.onmicrosoft.com/B2C_1A_SAML2_signup_signin/Samlp/metadata</value>
+                        <value type="java.lang.String">https://sunflowersdemo.b2clogin.com/sunflowersdemo.onmicrosoft.com/B2C_1A_SAML2_signup_signin/Samlp/metadata</value>
                     </constructor-arg>
                     <constructor-arg>
                         <value type="int">5000</value>
